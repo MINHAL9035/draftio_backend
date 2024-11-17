@@ -9,7 +9,10 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     const existUser = await User.findOne({ email })
     if (existUser) {
-        res.status(400)
+        res.status(400).json({
+            success: false,
+            message: 'user is already exist with this mail-Id',
+        })
         throw new Error('user is already exist with this mail-Id')
     }
 
